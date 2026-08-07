@@ -49,14 +49,14 @@ const navInactive =
     >
         <nav class="max-w-5xl mx-auto px-6 flex items-center gap-2">
             <a
-                href="/"
+                href="/portfolio"
                 class={`${navBase} ${currentPath === "" ? navActive : navInactive}`}
             >
                 Home
             </a>
 
             <a
-                href="/certificates"
+                href="/portfolio/certificates"
                 class={`${navBase} ${currentPath === "/certificates" ? navActive : navInactive}`}
             >
                 Certificates
@@ -66,7 +66,7 @@ const navInactive =
             <div class="group relative">
                 <!-- Dropdown Trigger Button -->
                 <button
-                    class={`${navBase} ${currentPath.startsWith("/projects") ? navActive : navInactive}`}
+                    class={`${navBase} ${currentPath.startsWith("/portfolio/projects") ? navActive : navInactive}`}
                 >
                     Projects
                     <!-- Chevron Arrow Icon -->
@@ -92,42 +92,42 @@ const navInactive =
                         class="bg-white rounded-b-xl shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-slate-200 p-2 flex flex-col gap-1"
                     >
                         <a
-                            href="/projects/subscription-tracker"
+                            href="/portfolio/projects/subscription-tracker"
                             class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-orange-100 hover:text-orange-700 rounded-lg transition-colors flex flex-col"
                         >
                             Subscription Tracker
                         </a>
 
                         <a
-                            href="/projects/chip8-emulator"
+                            href="/portfolio/projects/chip8-emulator"
                             class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-orange-100 hover:text-orange-700 rounded-lg transition-colors flex flex-col"
                         >
                             CHIP8 Emulator
                         </a>
 
                         <a
-                            href="/projects/action-rpg-template"
+                            href="/portfolio/projects/action-rpg-template"
                             class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-orange-100 hover:text-orange-700 rounded-lg transition-colors flex flex-col"
                         >
                             ARPG Template
                         </a>
 
                         <a
-                            href="/projects/skribble-clone"
+                            href="/portfolio/projects/skribble-clone"
                             class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-orange-100 hover:text-orange-700 rounded-lg transition-colors flex flex-col"
                         >
                             Skribble Clone
                         </a>
 
                         <a
-                            href="/projects/react-todo-app"
+                            href="/portfolio/projects/react-todo-app"
                             class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-orange-100 hover:text-orange-700 rounded-lg transition-colors flex flex-col"
                         >
                             React Todo App
                         </a>
 
                         <a
-                            href="/projects/tusimple-lane-detection"
+                            href="/portfolio/projects/tusimple-lane-detection"
                             class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-orange-100 hover:text-orange-700 rounded-lg transition-colors flex flex-col"
                         >
                             Tusimple Lane Detection
