@@ -20,13 +20,35 @@ const repoPath = `KonyD/${repoName}`;
 const apiResponse = await fetch(`https://api.github.com/repos/${repoPath}`);
 const repoData = await apiResponse.json();
 
-const { name, description, stargazers_count, forks_count, html_url, topics } =
-    repoData;
+if (repoData.message) {
+    console.error(`[GitHub API Error on ${repoPath}]: ${repoData.message}`);
+}
 
-const readmeUrl = `https://raw.githubusercontent.com/${repoPath}/main/README.md`;
-const readmeResponse = await fetch(readmeUrl);
-const markdown = await readmeResponse.text();
-const htmlContent = marked.parse(markdown);
+const name = repoData.name || repoName;
+const description = repoData.description || "No description provided.";
+const stargazers_count = repoData.stargazers_count || 0;
+const forks_count = repoData.forks_count || 0;
+const html_url = repoData.html_url || `https://github.com/${repoPath}`;
+const topics = repoData.topics || [];
+
+let readmeUrl = `https://raw.githubusercontent.com/${repoPath}/main/README.md`;
+let readmeResponse = await fetch(readmeUrl);
+
+if (!readmeResponse.ok) {
+    readmeUrl = `https://raw.githubusercontent.com/${repoPath}/master/README.md`;
+    readmeResponse = await fetch(readmeUrl);
+}
+
+const markdown = readmeResponse.ok
+    ? await readmeResponse.text()
+    : "# README not found";
+
+const fixedMarkdown = markdown.replace(
+    /https:\/\/github\.com\/([^\/]+\/[^\/]+)\/blob\/([^\s\)]+)/g,
+    "https://raw.githubusercontent.com/$1/$2",
+);
+
+const htmlContent = await marked.parse(fixedMarkdown);
 ---
 
 <BaseLayout title={`${name} | KonyDev`}>
@@ -58,7 +80,6 @@ const htmlContent = marked.parse(markdown);
 
             <div class="w-px h-6 bg-slate-300 mx-2"></div>
 
-            <!-- Render Topics -->
             {
                 topics && topics.length > 0 && (
                     <div>
@@ -73,7 +94,6 @@ const htmlContent = marked.parse(markdown);
         </div>
     </div>
 
-    <!-- Rendered README Content -->
     <div class="bg-white p-8 rounded-3xl shadow-sm">
         <article class="markdown-body">
             <Fragment set:html={htmlContent} />
